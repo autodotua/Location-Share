@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/map_root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:focusable="true"
+    android:orientation="vertical"
+    android:touchscreenBlocksFocus="true"
+    tools:context=".ui.MapFragment">
+
+
+    <com.esri.arcgisruntime.mapping.view.MapView
+        android:id="@+id/map_esri"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+
+    <LinearLayout
+        android:id="@+id/main_llt_side_buttons"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:orientation="vertical">
+
+        <ImageButton
+            android:id="@+id/main_btn_zoom_in"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/main_btn_zoom_in"
+            android:src="@drawable/ic_side_zoom_in" />
+
+        <ImageButton
+            android:id="@+id/main_btn_zoom_out"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/main_btn_zoom_out"
+            android:src="@drawable/ic_side_zoom_out" />
+
+        <ImageButton
+            android:id="@+id/main_btn_pan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/main_btn_pan"
+            android:src="@drawable/ic_bottom_location" />
+    </LinearLayout>
+
+    <!--<RelativeLayout-->
+        <!--android:id="@+id/llt_info_box"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="80dp"-->
+        <!--android:layout_alignParentBottom="true"-->
+        <!--android:background="#FFFFFF">-->
+
+        <!--<TextView-->
+            <!--android:id="@+id/tvw_info_bar"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:background="#CCCCCC"-->
+            <!--android:text="="-->
+            <!--android:textAlignment="center"-->
+            <!--android:textSize="20sp" />-->
+
+        <!--<ScrollView-->
+            <!--android:id="@+id/scr_info_person_list"-->
+            <!--android:layout_width="80dp"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:layout_below="@id/tvw_info_bar"-->
+            <!--android:layout_alignParentStart="true"-->
+            <!--android:scrollbars="none">-->
+
+            <!--<LinearLayout-->
+                <!--android:id="@+id/llt_info_person_list"-->
+                <!--android:layout_width="80dp"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:background="#FFFFFF"-->
+                <!--android:orientation="vertical"></LinearLayout>-->
+        <!--</ScrollView>-->
+
+        <!--<LinearLayout-->
+            <!--android:id="@+id/llt_info_person_detail"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:layout_below="@id/tvw_info_bar"-->
+            <!--android:layout_alignParentEnd="true"-->
+            <!--android:layout_marginStart="12dp"-->
+            <!--android:layout_toEndOf="@id/scr_info_person_list"-->
+            <!--android:background="#FFFFFF"-->
+            <!--android:orientation="vertical"-->
+            <!--android:visibility="invisible">-->
+
+            <!--<TextView-->
+                <!--android:id="@+id/tvw_info_name"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:textAlignment="center"-->
+                <!--android:textSize="20sp"-->
+                <!--android:textStyle="bold" />-->
+
+            <!--<LinearLayout-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:orientation="horizontal">-->
+
+                <!--<TextView-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:text="时间："-->
+                    <!--android:textSize="20sp" />-->
+
+                <!--<TextView-->
+                    <!--android:id="@+id/tvw_info_time"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:textSize="20sp" />-->
+            <!--</LinearLayout>-->
+
+            <!--<LinearLayout-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:orientation="horizontal">-->
+
+                <!--<TextView-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:text="经度："-->
+                    <!--android:textSize="20sp" />-->
+
+                <!--<TextView-->
+                    <!--android:id="@+id/tvw_info_lng"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:textSize="20sp" />-->
+            <!--</LinearLayout>-->
+
+            <!--<LinearLayout-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:orientation="horizontal">-->
+
+                <!--<TextView-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:text="纬度："-->
+                    <!--android:textSize="20sp" />-->
+
+                <!--<TextView-->
+                    <!--android:id="@+id/tvw_info_lat"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:textSize="20sp" />-->
+            <!--</LinearLayout>-->
+
+            <!--<LinearLayout-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:orientation="horizontal">-->
+
+                <!--<TextView-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:text="海拔："-->
+                    <!--android:textSize="20sp" />-->
+
+                <!--<TextView-->
+                    <!--android:id="@+id/tvw_info_alt"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:textSize="20sp" />-->
+            <!--</LinearLayout>-->
+
+            <!--<LinearLayout-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:orientation="horizontal">-->
+
+                <!--<TextView-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:text="精度："-->
+                    <!--android:textSize="20sp" />-->
+
+                <!--<TextView-->
+                    <!--android:id="@+id/tvw_info_acc"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:textSize="20sp" />-->
+            <!--</LinearLayout>-->
+        <!--</LinearLayout>-->
+    <!--</RelativeLayout>-->
+
+</RelativeLayout>

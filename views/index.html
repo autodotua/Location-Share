@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport"
+        content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <title>位置共享</title>
+
+    <link href="css/jquery-ui-themes-1.12.1/jquery-ui.min.css" rel="stylesheet" />
+    <link href="css/jquery-ui-themes-1.12.1/jquery-ui.theme.min.css" rel="stylesheet" />
+    <link href="css/jquery-ui-themes-1.12.1/themes/ui-lightness/jquery-ui.min.css" rel="stylesheet" />
+    <link href="css/index.css" rel="stylesheet" />
+    <script src="js/index.js"></script>
+    <link href="css/bootstrap.min.css" rel="stylesheet" />
+    <script src="js/jquery.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-sm bg-dark navbar-dark ">
+        <a class="navbar-brand" href="#">位置共享</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+            aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        组
+                    </a>
+                    <div id="nav-group" class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a id="nav-change-group" class="dropdown-item" href="#">修改组</a>
+                        <a id="nav-current-group" class="dropdown-item" href="#">当前组：</a>
+                        <div class="dropdown-divider"></div>
+                        <div id="nav-group-members">
+
+                        </div>
+                        <a id="a-nav-group  -name" class="dropdown-item" href="#"></a>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a id="nav-change-name" href="#" class="nav-link">昵称</a>
+                </li>
+                <li class="nav-item">
+                    <a id="nav-positionning" href="#" class="nav-link">关闭定位</a>
+
+                </li>
+            </ul>
+            <!-- <ul class="nav navbar-nav navbar-right">
+                        <li class="nav-item">
+                            <a class="nav-link" href="/Home/Login">登录</a>
+                        </li>
+    
+                </ul> -->
+        </div>
+
+    </nav>
+
+
+    <div id="content">
+        <div id="map-view" class="map-view"></div>
+    </div>
+    <div id="popup" class="popup">
+        <a href="#" id="popup-closer" class="popup-closer"></a>
+        <a id="popup-name" class="popup-name"></a>
+
+        <table class="popup_table">
+            <tr>
+                <td> <b>时间</b></td>
+                <td class="column2"> <a id="popup-last-time"></a></td>
+            </tr>
+            <tr>
+                <td> <b>经度</b></td>
+                <td class="column2"> <a id="popup-lng"></a></td>
+            </tr>
+            <tr>
+                <td> <b>纬度</b></td>
+                <td class="column2"> <a id="popup-lat"></a></td>
+            </tr>
+            <tr>
+                <td> <b>海拔</b></td>
+                <td class="column2"> <a id="popup-alt"></a></td>
+            </tr>
+            <tr>
+                <td> <b>精度</b></td>
+                <td class="column2"> <a id="popup-acc"></a></td>
+            </tr>
+        </table>
+    </div>
+
+    <div id="dialog-login" class="dialog-login" title="登录/注册">
+        <div>
+            <p>
+                <a class="dialog-label">用户名：</a>
+                <input class="dialog-input" id="dialog-username" type="text" />
+            </p>
+            <p>
+                <a class="dialog-label">密码：</a>
+                <input class="dialog-input" id="dialog-password" type="text" />
+            </p>
+            <button id="dialog-btn-sign-in" class="btn btn-primary"> 登录 </button>
+            <button id="dialog-btn-sign-up" class="btn btn-secondary"> 注册 </button>
+        </div>
+    </div>
+
+    <div id="float-alert-msg" class="float-alert-msg">
+    </div>
+
+    <button id="btn-location"  class="btn btn-light float-right-bottom-button">
+        <img src="img/location.svg">
+    </div>
+</body>
+
+</html>

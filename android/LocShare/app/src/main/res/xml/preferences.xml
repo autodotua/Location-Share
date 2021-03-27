@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+    <PreferenceCategory android:title="地图和定位">
+        <SwitchPreference
+            android:defaultValue="true"
+            android:key="@string/key_location"
+            android:summary="@string/summary_location"
+            android:title="@string/title_location" />
+
+        <Preference
+            android:key="@string/key_keep_time"
+            android:summary="@string/summary_keep_time"
+            android:title="@string/title_keep_time" />
+
+        <Preference
+            android:key="@string/key_positioning_Interval"
+            android:summary="@string/summary_positioning_Interval"
+            android:title="@string/title_positioning_Interval" />
+        <Preference
+            android:key="@string/key_hide"
+            android:summary="@string/summary_hide"
+            android:title="@string/title_hide" />
+
+    </PreferenceCategory>
+    <PreferenceCategory android:title="地图">
+
+        <ListPreference
+            android:defaultValue="esri"
+            android:dialogTitle="@string/dialog_map_sdk"
+            android:key="@string/key_map_sdk"
+            android:summary="@string/summary_map_sdk"
+            android:title="@string/title_map_sdk"
+            android:entries="@array/entries_map_sdk"
+            android:entryValues="@array/entries_value_map_sdk"/>
+        <ListPreference
+            android:dialogTitle="@string/dialog_esri"
+            android:key="@string/key_esri"
+            android:summary="@string/summary_esri"
+            android:title="@string/title_esri" />
+        <EditTextPreference
+            android:defaultValue="@null"
+            android:key="@string/key_tiles"
+            android:summary="@string/summary_tiles"
+            android:title="@string/title_tiles" />
+    </PreferenceCategory>
+    <PreferenceCategory android:title="用户">
+        <Preference
+            android:key="@string/key_user"
+            android:title="@string/title_user" />
+        <EditTextPreference
+            android:key="@string/key_display_name"
+            android:title="@string/title_display_name" />
+    </PreferenceCategory>
+    <PreferenceCategory android:title="关于">
+        <Preference
+            android:key="@string/key_about"
+            android:summary="@string/summary_about"
+            android:title="@string/title_about" />
+        <Preference
+            android:key="@string/key_exit"
+            android:summary="@string/summary_exit"
+            android:title="@string/title_exit" />
+    </PreferenceCategory>
+</PreferenceScreen>

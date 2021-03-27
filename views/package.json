@@ -1,0 +1,28 @@
+{
+  "name": "loc-share",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "jquery": "^3.4.1",
+    "jquery-ui": "^1.12.1",
+    "jquery.cookie": "^1.4.1",
+    "openlayers": "^4.6.5",
+    "ts-md5": "^1.2.5"
+  },
+  "devDependencies": {
+    "@types/bootstrap": "^4.3.1",
+    "@types/jquery": "^3.3.30",
+    "@types/jquery.cookie": "^1.4.31",
+    "@types/jqueryui": "^1.12.7",
+    "@types/openlayers": "^4.6.17",
+    "ts-loader": "^6.0.4",
+    "typescript": "^3.5.2",
+    "webpack": "^4.35.2"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}

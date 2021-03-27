@@ -1,0 +1,58 @@
+<resources>
+    <string name="app_name">位置共享</string>
+    <string name="main_btn_zoom_in">放大</string>
+    <string name="main_btn_zoom_out">缩小</string>
+    <string name="main_btn_pan">定位</string>
+    <string name="layer_btn_menu">设置</string>
+    <string name="menu_rotate">地图旋转</string>
+    <string name="menu_keep_location_display_background">后台保持定位</string>
+    <string name="menu_location">定位</string>
+    <string name="menu_tile_url">瓦片底图地址</string>
+    <string name="menu_default_scale">默认比例尺</string>
+    <string name="menu_gps_min_time">GPS最小更新时间</string>
+    <string name="menu_load_esri_map">加载Esri底图</string>
+    <string name="menu_about">关于</string>
+    <string name="menu_exit">退出</string>
+    <string name="menu_side_button_right">在右侧显示按钮</string>
+    <string name="menu_ui">界面</string>
+    <string name="menu_compass">显示地图指北针</string>
+    <string name="menu_registered">重新注册</string>
+    <string name="menu_change_user_info">修改信息</string>
+    <string name="menu_interval">间歇定位</string>
+    <string name="menu_user">用户</string>
+    <string name="menu_map">地图和定位</string>
+    <string name="menu_get_time">保留时间</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_login">登录</string>
+    <string name="login_pswd_hint">密码</string>
+    <string name="login_btn_sign_in">登录</string>
+    <string name="login_btn_sign_up">注册</string>
+    <string name="welcome">欢迎</string>
+    <string name="invalid_username">非法的用户名</string>
+    <string name="invalid_password">密码必须大于5个字符</string>
+    <string name="login_failed">登陆失败</string>
+    <string name="key_user">user</string>
+    <string name="login_login_hint">登录</string>
+    <string name="login_edt_ime">登录</string>
+    <string name="splash_image_desc">启动图标</string>
+    <string name="key_keep_time">keep_time</string>
+    <string name="title_keep_time">位置保留时间</string>
+    <string name="summary_keep_time">选择显示多久之前以后的成员位置</string>
+    <string name="minute">分</string>
+    <string name="tsp_continuing">持续</string>
+
+    <string name="menu_group">组</string>
+    <string name="dialog_button_ok">确定</string>
+    <string name="modify">修改</string>
+    <string name="dialog_change_group_title">切换组</string>
+    <string name="dialog_change_group_message">修改组，并重新获取新组的成员</string>
+    <string name="list_person_new">新消息</string>
+    <string name="list_person_last_update_label">上次更新：</string>
+    <string name="login_title">登录/注册</string>
+    <string name="hour">时</string>
+    <string name="key_hide">hide</string>
+    <string name="summary_hide">隐藏最后一次定位记录</string>
+    <string name="title_hide">隐藏定位记录</string>
+
+
+</resources>

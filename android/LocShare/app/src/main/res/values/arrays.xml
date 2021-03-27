@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="entries_map_sdk">
+        <item>esri</item>
+        <item>osmdroid</item>
+    </string-array>
+    <string-array name="entries_value_map_sdk">
+        <item>esri</item>
+        <item>osmdroid</item>
+    </string-array>
+</resources>

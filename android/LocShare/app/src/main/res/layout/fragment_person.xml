@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary">
+
+    <ListView
+        android:id="@+id/person_lvw"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </ListView>
+
+    <androidx.core.widget.ContentLoadingProgressBar
+        android:id="@+id/person_loading"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        style="@style/Widget.AppCompat.ProgressBar"
+        android:layout_centerInParent="true"/>
+</RelativeLayout>

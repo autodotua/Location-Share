@@ -1,0 +1,42 @@
+<androidx.appcompat.widget.LinearLayoutCompat
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_gravity="center" >
+
+        <NumberPicker
+            android:id="@+id/tsp_num_hour"
+            android:layout_width="40dp"
+            android:layout_height="wrap_content"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:text="@string/hour" />
+        <NumberPicker
+            android:id="@+id/tsp_num_min"
+            android:layout_width="40dp"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:text="@string/minute" />
+    </LinearLayout>
+<CheckBox
+    android:id="@+id/tsp_chk_continuing"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="@string/tsp_continuing"
+    />
+</androidx.appcompat.widget.LinearLayoutCompat>

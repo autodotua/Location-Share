@@ -1,0 +1,135 @@
+html {
+	width: 100%;
+	height: 100%;
+	margin: 0;
+}
+
+body {
+	width: 100%;
+	height: 100%;
+}
+
+#container {
+	position: relative;
+	width: 100%;
+	height: 100%;
+}
+
+#content {
+	position: relative;
+	width: 100%;
+	height: calc(100% - 60px);
+}
+
+
+.map-view {
+	height: 100%;
+	z-index: 0;
+}
+
+.popup {
+	position: absolute;
+	background-color: white;
+	-webkit-filter: drop-shadow(0 1px 4px rgba(0, 0, 0, 0.2));
+	filter: drop-shadow(0 1px 4px rgba(0, 0, 0, 0.2));
+	padding: 15px;
+	border-radius: 10px;
+	border: 1px solid #cccccc;
+	bottom: 12px;
+	left: -50px;
+	min-width: 240px;
+	z-index: 10000;
+}
+
+.popup:after,
+.popup:before {
+	top: 100%;
+	border: solid transparent;
+	content: " ";
+	height: 0;
+	width: 0;
+	position: absolute;
+	pointer-events: none;
+}
+
+.popup:after {
+	border-top-color: white;
+	border-width: 10px;
+	left: 48px;
+	margin-left: -10px;
+}
+
+.popup:before {
+	border-top-color: #cccccc;
+	border-width: 11px;
+	left: 48px;
+	margin-left: -11px;
+}
+
+.popup-closer {
+	text-decoration: none;
+	position: absolute;
+	top: 2px;
+	right: 8px;
+}
+
+.popup_table {
+	border: 2px solid transparent;
+	font-size: 0.8rem;
+}
+.popup_table td{
+	padding: 4px;
+}
+
+.popup-closer:hover {
+	text-decoration: none;
+}
+
+.popup-closer:after {
+	content: "✖";
+	text-decoration: none !important
+}
+
+.popup-name {
+	font-weight: bold;
+	font-size: 1.5em !important;
+	margin-left: 40%;
+}
+
+
+.float-alert-msg {
+	z-index: 10;
+	position: fixed;
+	top: 60px;
+	right: 8px;
+	background: #e9e9e9;
+	padding-left: 4px;
+	padding-right: 4px;
+	border-radius: 4px;
+	color: red;
+	display: none;
+}
+.dialog-login
+{
+	width:320px!important;
+}
+.dialog-label{
+	width:80px;
+	display: inline-block;
+}
+.dialog-input{
+	width:180px;
+	display: inline-block;
+}
+
+.float-right-bottom-button{
+	padding: 4px!important;
+	position: fixed;
+	right:12px;
+	bottom:24px;
+}
+
+.float-right-bottom-button img{
+	width: 36px;
+	height: 36px;
+}

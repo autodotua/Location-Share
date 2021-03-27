@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="key_esri">esri</string>
+    <string name="title_esri">ESRI底图</string>
+    <string name="summary_esri">选择并使用ESRI地图作为底图，仅用于Esri SDK</string>
+    <string name="dialog_esri">选择底图</string>
+
+    <string name="key_location">location</string>
+    <string name="title_location">定位</string>
+    <string name="summary_location">打开开关后，开启前后台定位并上传当前位置</string>
+
+    <string name="key_tiles">tiles</string>
+    <string name="title_tiles">瓦片底图地址</string>
+    <string name="summary_tiles">设置并使用瓦片地图作为底图</string>
+
+    <string name="key_positioning_Interval">positioning_Interval</string>
+    <string name="title_positioning_Interval">定位间隔</string>
+    <string name="summary_positioning_Interval">设置两次定位上传的最小时间间隔</string>
+
+    <string name="key_about">about</string>
+    <string name="title_about">关于</string>
+    <string name="summary_about">编写人员：autodotua</string>
+
+    <string name="key_exit">exit</string>
+    <string name="title_exit">退出</string>
+    <string name="summary_exit">完全退出应用并关闭后台服务</string>
+
+    <string name="key_map_sdk">mapSdk</string>
+    <string name="title_map_sdk">地图SDK</string>
+    <string name="summary_map_sdk">选择使用不同的地图SDK。当前为%s</string>
+    <string name="dialog_map_sdk">选择地图SDK</string>
+
+    <string name="title_user">注销</string>
+    <string name="key_display_name">display_name</string>
+    <string name="title_display_name">修改昵称</string>
+
+    <string name="key_get_option">get_option</string>
+</resources>
