@@ -5,7 +5,6 @@ namespace LocShare.Models.Entity
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
-    using System.Data.Entity.Spatial;
 
     [Table("location")]
     public partial class LocationEntity
@@ -36,9 +35,11 @@ namespace LocShare.Models.Entity
         [Column("accuracy")]
         [JsonProperty("accuracy")]
         public double? Accuracy { get; set; }
+
         [Column("speed")]
         [JsonProperty("speed")]
         public double? Speed { get; set; }
+
         [Column("time")]
         [JsonProperty("time")]
         public DateTime Time { get; set; }

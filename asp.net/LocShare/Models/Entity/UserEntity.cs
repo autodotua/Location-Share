@@ -5,9 +5,8 @@ namespace LocShare.Models.Entity
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
-    using System.Data.Entity.Spatial;
+
     [Table("login_user")]
-  
     public partial class UserEntity
     {
         [Key]
@@ -33,15 +32,14 @@ namespace LocShare.Models.Entity
         [JsonProperty("groupName")]
         public string GroupName { get; set; } = "";
 
-
         [Column("last_update_time")]
         [JsonProperty("lastUpdateTime")]
         public DateTime? LastUpdateTime { get; set; }
 
-
         [NotMapped]
         [JsonProperty("token")]
         public string Token { get; set; }
+
         [NotMapped]
         [JsonProperty("lastLocation")]
         public LocationEntity LastLocation { get; set; }
@@ -54,6 +52,7 @@ namespace LocShare.Models.Entity
             LastLocation = location;
             return this;
         }
+
         public override string ToString()
         {
             return Name + "£¨" + DisplayName + "£© - " + GroupName;

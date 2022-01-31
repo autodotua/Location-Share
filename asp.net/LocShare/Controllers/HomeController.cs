@@ -2,25 +2,21 @@
 using LocShare.Models.Entity;
 using LocShare.Models.Transmission;
 using LocShare.Service;
+using Microsoft.AspNetCore.Cors;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
-using System.Data.Entity;
 using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
-using System.Web;
-using System.Web.Http;
-using System.Web.Http.Cors;
 
 namespace LocShare.Controllers
 {
-    [EnableCors(origins: "*", headers: "*", methods: "*")]
-    [RoutePrefix("api")]
-    public class HomeController : ApiController
+    public class HomeController : ControllerBase
     {
-        DbModel db = new DbModel();
-
+        private DbModel db = new DbModel();
 
         [HttpGet]
         [Route("index")]
@@ -30,13 +26,14 @@ namespace LocShare.Controllers
         }
 
         private Dictionary<string, string> userIdToName = new Dictionary<string, string>();
+
         [HttpPost]
         [Route("members")]
-        public IHttpActionResult GetGroupMenbers(Request<object> request)
+        public IActionResult GetGroupMenbers(Request<object> request)
         {
             if (!TokenService.IsTokenValid(db, request.User))
             {
-                return StatusCode(HttpStatusCode.Unauthorized);
+                return Unauthorized();
             }
             if (request.User.GroupName == null)
             {
@@ -51,13 +48,14 @@ namespace LocShare.Controllers
             }
             return Ok(new Response<List<UserEntity>>() { Data = users });
         }
+
         [HttpPost]
         [Route("get")]
-        public IHttpActionResult GetAll(Request<GetOption> request)
+        public IActionResult GetAll(Request<GetOption> request)
         {
             if (!TokenService.IsTokenValid(db, request.User))
             {
-                return StatusCode(HttpStatusCode.Unauthorized);
+                return Unauthorized();
             }
 
             if (request.User.GroupName == "test")
@@ -77,10 +75,8 @@ namespace LocShare.Controllers
                         Altitude = 500 * r.NextDouble(),
                         Id = i
                     });
-
                 }
                 return Ok(new Response<List<LocationEntity>>() { Data = locations });
-
             }
 
             GetOption option = request.Data;
@@ -128,7 +124,7 @@ namespace LocShare.Controllers
             //{
             //    ((UserEntity)item.User).LastLocation = item.Location;
             //    userWithLocations.Add(item.User);
-            //}          
+            //}
             var usersAndLocations = (from u in db.User
                                      join l in db.Location on u.LastLocationId equals l.Id into uls
                                      from ul in uls.DefaultIfEmpty()
@@ -142,75 +138,17 @@ namespace LocShare.Controllers
                 item.u.GroupName = null;
             }
             var users = usersAndLocations.Select(p => p.u).ToList();
-  
-            //HashSet<UserEntity> userWithLocations = new HashSet<UserEntity>();
 
-
-            //IEnumerable<LocationEntity> locationEntities = null;
-            //    locationEntities = from l in db.Location
-            //                       join u in db.User on l.Username equals u.Name
-            //                       where u.GroupName == request.User.GroupName && l.Time > someTimesBefore && u.Name != request.User.Name
-            //                       select l;
-            //locationEntities = locationEntities.ToArray();
-
-            //Dictionary<string, LocationEntity> distinctLocations = new Dictionary<string, LocationEntity>();
-            //foreach (LocationEntity location in locationEntities)
-            //{
-            //    if (distinctLocations.ContainsKey(location.Username))
-            //    {
-            //        LocationEntity another = distinctLocations[location.Username];
-            //        if (another.Time < location.Time)
-            //        {
-            //            distinctLocations[location.Username] = location;
-            //        }
-            //    }
-            //    else
-            //    {
-            //        distinctLocations.Add(location.Username, location);
-            //    }
-            //}
-            ////LocationEntity[] locations = new List<LocationEntity>();
-            //foreach (LocationEntity location in distinctLocations.Values)
-            //{
-            //    string username = location.Username;
-            //    if (userIdToName.ContainsKey(username))
-            //    {
-            //        location.Username = userIdToName[username];
-            //    }
-            //    else
-            //    {
-            //        UserEntity user = db.User.Find(username);
-            //        string name = null;
-            //        if (user != null)
-            //        {
-            //            name = user.DisplayName;
-            //            if (string.IsNullOrEmpty(name))
-            //            {
-            //                name = username;
-            //            }
-
-            //        }
-            //        else
-            //        {
-            //            //理论上不会到这里
-            //            name = username;
-            //        }
-            //        userIdToName.Add(username, name);
-            //    }
-            //}
-
-            //var a = usersAndLocations.ToArray();
             return Ok(new Response<List<UserEntity>>() { Data = users });
-            //return Ok(new Response<List<LocationEntity>>() { Data = distinctLocations.Values.ToList() });
-
         }
+
         [HttpPost]
         [Route("update")]
-        public IHttpActionResult Update(Request<LocationEntity> request)
+        public IActionResult Update(Request<LocationEntity> request)
         {
             if (!TokenService.IsTokenValid(db, request.User))
             {
-                return StatusCode(HttpStatusCode.Unauthorized);
+                return Unauthorized();
             }
             LocationEntity location = request.Data;
             location.Time = DateTime.UtcNow;
@@ -231,6 +169,7 @@ namespace LocShare.Controllers
 
             return Ok(new Response<object>());
         }
+
         /// <summary>
         /// 注册
         /// </summary>
@@ -238,11 +177,11 @@ namespace LocShare.Controllers
         /// <returns></returns>
         [HttpPost]
         [Route("hide")]
-        public IHttpActionResult Hide(Request<object> request)
+        public IActionResult Hide(Request<object> request)
         {
             if (!TokenService.IsTokenValid(db, request.User))
             {
-                return StatusCode(HttpStatusCode.Unauthorized);
+                return Unauthorized();
             }
             UserEntity user = db.User.Find(request.User.Name);
             if (user != null)//理论上不会是null
@@ -256,6 +195,7 @@ namespace LocShare.Controllers
 
             return Ok(new Response<object>());
         }
+
         /// <summary>
         /// 注册
         /// </summary>
@@ -263,7 +203,7 @@ namespace LocShare.Controllers
         /// <returns></returns>
         [HttpPost]
         [Route("signUp")]
-        public IHttpActionResult SignUp(Request<UserEntity> request)
+        public IActionResult SignUp(Request<UserEntity> request)
         {
             if (db.User.Find(request.Data.Name) != null)
             {
@@ -277,10 +217,9 @@ namespace LocShare.Controllers
             db.User.Add(request.Data);
             db.SaveChanges();
 
-
-
             return Ok(new Response<string>() { Data = TokenService.GetToken(request.Data) });
         }
+
         /// <summary>
         /// 登录
         /// </summary>
@@ -288,7 +227,7 @@ namespace LocShare.Controllers
         /// <returns></returns>
         [HttpPost]
         [Route("signIn")]
-        public IHttpActionResult SignIn(Request<UserEntity> request)
+        public IActionResult SignIn(Request<UserEntity> request)
         {
             var user = db.User.Find(request.Data.Name);
             if (user == null)
@@ -303,6 +242,7 @@ namespace LocShare.Controllers
             user.Password = null;
             return Ok(new Response<UserEntity>() { Data = user });
         }
+
         /// <summary>
         /// 检查Token
         /// </summary>
@@ -310,34 +250,34 @@ namespace LocShare.Controllers
         /// <returns></returns>
         [HttpPost]
         [Route("checkToken")]
-        public IHttpActionResult CheckToken(Request<object> request)
+        public IActionResult CheckToken(Request<object> request)
         {
-            var ok = TokenService.IsTokenValid(db, request.User,out string message);
-            return Ok(new Response<object>() { Succeed = ok,Message=message});
+            var ok = TokenService.IsTokenValid(db, request.User, out string message);
+            return Ok(new Response<object>() { Succeed = ok, Message = message });
         }
 
         [HttpPost]
         [Route("userInfo")]
-        public IHttpActionResult SetUserInfo(Request<UserEntity> request)
+        public IActionResult SetUserInfo(Request<UserEntity> request)
         {
             if (!TokenService.IsTokenValid(db, request.User))
             {
-                return StatusCode(HttpStatusCode.Unauthorized);
+                return Unauthorized();
             }
             UserEntity user = db.User.Find(request.User.Name);
             UserEntity newUser = request.Data;
             Debug.Assert(newUser != null);
             if (user != null)
             {
-                if (newUser.GroupName!=null)
+                if (newUser.GroupName != null)
                 {
                     user.GroupName = newUser.GroupName;
                 }
-                if (!string.IsNullOrEmpty(newUser.Password ))
+                if (!string.IsNullOrEmpty(newUser.Password))
                 {
                     user.Password = newUser.Password;
                 }
-                if (newUser.DisplayName !=null)
+                if (newUser.DisplayName != null)
                 {
                     user.DisplayName = newUser.DisplayName;
                 }
@@ -347,12 +287,5 @@ namespace LocShare.Controllers
             }
             return NotFound();
         }
-
-        protected override void Dispose(bool disposing)
-        {
-            db.Dispose();
-            base.Dispose(disposing);
-        }
-
     }
 }
