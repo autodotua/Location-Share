@@ -18,8 +18,9 @@ import java.net.URL
 object NetworkService
 {
 
-//    private const val rootUrl = "http://192.168.2.10:8080/api/"
-    private val rootUrl = "http://locshare.autodotua.top/api/"
+   //private const val rootUrl = "http://192.168.1.10:8080/api/"
+    //private val rootUrl = "http://locshare.autodotua.top/api/"
+    private val rootUrl = "https://autodotua.top/locshare/api/"
 
 
     fun setUserInfo(context: Context, user: User, callback: (succeed: Boolean, message: String?, response: Response?) -> Unit)

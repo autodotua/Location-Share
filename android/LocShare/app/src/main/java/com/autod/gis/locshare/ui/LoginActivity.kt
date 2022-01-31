@@ -113,21 +113,23 @@ class LoginActivity : AppCompatActivity()
             password = getMd5(pswd)
         }
         NetworkService.signIn(this, user) { succeed, message, response ->
-            login_pgb_loading.visibility = View.INVISIBLE
-            if (!succeed)
-            {
-                showError("登陆失败：$message")
-                return@signIn
+            runOnUiThread {
+                login_pgb_loading.visibility = View.INVISIBLE
+                if (!succeed)
+                {
+                    showError("登陆失败：$message")
+                    return@runOnUiThread
+                }
+                if (!response!!.succeed)
+                {
+                    showError("登陆失败：${response.message}")
+                    return@runOnUiThread
+                }
+                setUser(User.convertFromMap(response.getLinkedTreeMapData()))
+                finish()
+                Toast.makeText(this, "登陆成功", Toast.LENGTH_SHORT).show()
             }
-            if (!response!!.succeed)
-            {
-                showError("登陆失败：${response.message}")
-//                Toast.makeText(this, "登陆失败：${response.message}", Toast.LENGTH_SHORT).show()
-                return@signIn
-            }
-            setUser(User.convertFromMap(response.getLinkedTreeMapData()))
-            finish()
-            Toast.makeText(this, "登陆成功", Toast.LENGTH_SHORT).show()
+
         }
     }
 
@@ -138,25 +140,27 @@ class LoginActivity : AppCompatActivity()
             password = getMd5(pswd)
         }
         NetworkService.signUp(this, user) { succeed, message, response ->
-            login_pgb_loading.visibility = View.INVISIBLE
-            if (!succeed)
-            {
-                showError("注册失败：$message")
+            runOnUiThread {
+                login_pgb_loading.visibility = View.INVISIBLE
+                if (!succeed)
+                {
+                    showError("注册失败：$message")
 //                Toast.makeText(this, "注册失败：$message", Toast.LENGTH_SHORT).show()
-                return@signUp
-            }
-            if (!response!!.succeed)
-            {
-                showError("注册失败：${response.message}")
+                    return@runOnUiThread
+                }
+                if (!response!!.succeed)
+                {
+                    showError("注册失败：${response.message}")
 //                Toast.makeText(this, "注册失败：${response.message}", Toast.LENGTH_SHORT).show()
-                return@signUp
-            }
+                    return@runOnUiThread
+                }
 
 //            Toast.makeText(this, "注册成功：${response.message}", Toast.LENGTH_SHORT).show()
-            user.token = response.data as String
-            setUser(user)
-            finish()
-            Toast.makeText(this, "注册并登录成功", Toast.LENGTH_SHORT).show()
+                user.token = response.data as String
+                setUser(user)
+                finish()
+                Toast.makeText(this, "注册并登录成功", Toast.LENGTH_SHORT).show()
+            }
         }
     }
 
