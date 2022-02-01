@@ -1,4 +1,4 @@
-namespace LocShare.Models.Entity
+namespace LocShare.Models
 {
     using System;
     using System.ComponentModel.DataAnnotations.Schema;
@@ -8,8 +8,8 @@ namespace LocShare.Models.Entity
 
     public partial class DbModel : DbContext
     {
-        public virtual DbSet<UserEntity> User { get; set; }
-        public virtual DbSet<LocationEntity> Location { get; set; }
+        public virtual DbSet<UserEntity> Users { get; set; }
+        public virtual DbSet<LocationEntity> Locations { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -26,6 +26,11 @@ namespace LocShare.Models.Entity
                 .Property(e => e.Password)
                 .IsFixedLength()
                 .IsUnicode(false);
+        }
+
+        public override void Dispose()
+        {
+            base.Dispose();
         }
     }
 }

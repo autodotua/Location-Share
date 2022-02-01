@@ -14,57 +14,58 @@ import java.net.HttpURLConnection
 import java.net.URL
 
 
-
 object NetworkService
 {
 
-   //private const val rootUrl = "http://192.168.1.10:8080/api/"
+    private const val rootUrl = "http://192.168.1.10:6390/"
     //private val rootUrl = "http://locshare.autodotua.top/api/"
-    private val rootUrl = "https://autodotua.top/locshare/api/"
+    //   private val rootUrl = "https://autodotua.top/locshare/api/"
 
 
     fun setUserInfo(context: Context, user: User, callback: (succeed: Boolean, message: String?, response: Response?) -> Unit)
     {
-        post(context, "userInfo", user, callback)
+        post(context, "user/userInfo", user, callback)
     }
 
 
     fun getAll(context: Context, callback: (succeed: Boolean, message: String?, response: Response?) -> Unit)
     {
-        post(context, "get", GetOption.current, callback)
+        get(context, "location/get?time="+ GetOption.current.time, callback)
     }
-
-//    fun getGroupMembers(context: Context, callback: (succeed: Boolean, message: String?, response: Response?) -> Unit)
-//    {
-//        post(context, "members", null, callback)
-//    }
 
     fun update(context: Context, location: Location, callback: (succeed: Boolean, message: String?, response: Response?) -> Unit)
     {
-        post(context, "update", location, callback)
+        post(context, "location/update", location, callback)
     }
 
     fun hide(context: Context, callback: (succeed: Boolean, message: String?, response: Response?) -> Unit)
     {
-        post(context, "hide", null, callback)
+        post(context, "location/hide", null, callback)
     }
 
     fun signIn(context: Context, user: User, callback: (succeed: Boolean, message: String?, response: Response?) -> Unit)
     {
-        post(context, "signIn", user, callback)
+        post(context, "user/signIn", user, callback)
     }
 
     fun signUp(context: Context, user: User, callback: (succeed: Boolean, message: String?, response: Response?) -> Unit)
     {
-        post(context, "signUp", user, callback)
+        post(context, "user/signUp", user, callback)
     }
 
-//    fun checkToken(context: Context, callback: (succeed: Boolean, message: String?, response: Response?) -> Unit)
-//    {
-//        post(context, "checkToken", null, callback)
-//    }
 
+    private fun get(context: Context, subUrl: String,
+                         callback: (succeed: Boolean, message: String?, response: Response?) -> Unit?)
+    {
+        send(context, subUrl, "GET",null, callback)
+    }
     private fun <T> post(context: Context, subUrl: String, data: T?,
+                         callback: (succeed: Boolean, message: String?, response: Response?) -> Unit?)
+    {
+        send(context, subUrl, "POST",data, callback)
+    }
+
+    private fun <T> send(context: Context, subUrl: String, method: String, data: T?,
                          callback: (succeed: Boolean, message: String?, response: Response?) -> Unit?)
     {
         //开启线程，发送请求
@@ -75,23 +76,30 @@ object NetworkService
             {
                 val url = URL(rootUrl + subUrl)
                 connection = url.openConnection() as HttpURLConnection
-                //设置请求方法
-                connection.requestMethod = "POST"
-                //设置连接超时时间（毫秒）
+                connection.requestMethod = method
                 connection.connectTimeout = 5000
-                //设置读取超时时间（毫秒）
                 connection.readTimeout = 5000
-                val request = Request<T>()
-                request.user = User.current
-                request.data = data
-                val dataJson = Gson().toJson(request)
-                val dataBytes = dataJson.toByteArray();
+                var dataBytes: ByteArray = ByteArray(0)
+                if (method == "POST")
+                {
+                    val request = Request<T>()
+                    request.data = data
+                    val dataJson = Gson().toJson(request)
+                    dataBytes = dataJson.toByteArray();
+                }
+                connection.setRequestProperty("Authorization", User.current?.token)
+                if (method == "POST")
+                {
+                    connection.setRequestProperty("Content-Length", dataBytes.size.toString())
+                }
                 connection.setRequestProperty("Content-Type", "application/json")
-                connection.setRequestProperty("Content-Length", dataBytes.size.toString())
-                connection.doOutput = true
-                connection.outputStream.write(dataJson.toByteArray())
-
+                if (method == "POST")
+                {
+                    connection.doOutput = true
+                    connection.outputStream.write(dataBytes)
+                }
                 val code = connection.responseCode
+
                 if (code == 401)
                 {
                     if (!LoginActivity.hasInstance)
@@ -99,6 +107,7 @@ object NetworkService
                         val intent = Intent(context, LoginActivity::class.java)
                         intent.putExtra("message", "登录信息失效，请重新登陆")
                         intent.putExtra("deleteUser", true)
+                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
                         context.startActivity(intent)
                     }
                     return@Thread
@@ -108,17 +117,8 @@ object NetworkService
                     val inputStream = connection.inputStream
                     var text = inputStream.bufferedReader().use(BufferedReader::readLine);
                     Looper.prepare()
-                    val response = Gson().fromJson(text,Response::class.java)
-//                    val response = Gson().fromJson<Response<TR>>(text,
-//                            object:TypeToken<Response<TR>>(){}.type)
-                    try
-                    {
+                    val response = Gson().fromJson(text, Response::class.java)
                         callback(true, null, response)
-                    }
-                    catch (ex: Exception)
-                    {
-
-                    }
                     Looper.loop()
                 }
                 else

@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace LocShare.Models.Transmission
+namespace LocShare.Dto
 {
     public class Response<T>
     {

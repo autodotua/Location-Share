@@ -1,11 +1,11 @@
-﻿using LocShare.Models.Entity;
+﻿using LocShare.Models;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace LocShare.Models.Transmission
+namespace LocShare.Dto
 {
     public class GetOption
     {

@@ -7,8 +7,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using LocShare.Service;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.NewtonsoftJson;
 using Microsoft.Extensions.Configuration;
@@ -28,7 +31,10 @@ namespace LocShare
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers()
+            services.AddControllers(o =>
+            {
+                o.Filters.Add(new TokenFilter(Configuration));
+            })
                 .AddInject()
                 .AddNewtonsoftJson(options =>
                 {
@@ -47,6 +53,13 @@ namespace LocShare
             app.UseRouting();
             app.UseAuthorization();
             app.UseInject(string.Empty);
+            app.UseExceptionHandler(c => c.Run(async context =>
+            {
+                var exceptionHandlerPathFeature = context.Features.Get<IExceptionHandlerPathFeature>();
+                var exception = exceptionHandlerPathFeature.Error;
+
+                await context.Response.WriteAsJsonAsync(new { error = exception.Message });
+            }));
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(

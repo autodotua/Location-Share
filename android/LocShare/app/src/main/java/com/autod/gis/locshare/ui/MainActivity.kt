@@ -271,8 +271,6 @@ class MainActivity : AppCompatActivity()
             }
             val userMap = response.getLinkedTreeMapListData()
             val users = userMap.stream().map { User.convertFromMap(it) }.collect(Collectors.toList())
-            //                locationDetails.clear()
-            //                locations.forEach { p -> locationDetails[p.username] = p }
             val now = Calendar.getInstance(TimeZone.getTimeZone("utc"))
             mapFragment.mapViewHelper.updatePeople(users.stream()
                     .filter {

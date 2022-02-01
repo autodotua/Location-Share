@@ -12,6 +12,7 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Furion" Version="3.0.6" />
+    <PackageReference Include="Furion.Extras.ObjectMapper.Mapster" Version="3.0.6" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.1" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
